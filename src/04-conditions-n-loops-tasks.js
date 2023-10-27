@@ -299,9 +299,27 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const str = ccn.toString().split('').reverse();
+  const conv = str.map((el) => parseInt(el, 10));
+  let sum = 0;
+  for (let i = 0; i < conv.length; i += 1) {
+    if (i % 2 !== 0) {
+      conv[i] *= 2;
+      if (conv[i] > 9) {
+        conv[i] -= 9;
+      }
+    }
+  }
+  for (let j = 0; j < conv.length; j += 1) {
+    sum += conv[j];
+  }
+  if (sum % 10 !== 0) {
+    return false;
+  }
+  return true;
 }
+
 
 /**
  * Returns the digital root of integer:
@@ -317,8 +335,24 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const str = num.toString().split('');
+  const conv = str.map((el) => parseInt(el, 10));
+  let sum = 0;
+  for (let i = 0; i < conv.length; i += 1) {
+    sum += conv[i];
+  }
+  const sumConv = sum.toString();
+  if (sumConv.length > 1) {
+    const str2 = sumConv.split('');
+    const conv2 = str2.map((el) => parseInt(el, 10));
+    let sum2 = 0;
+    for (let i = 0; i < conv2.length; i += 1) {
+      sum2 += conv2[i];
+    }
+    return sum2;
+  }
+  return sum;
 }
 
 
