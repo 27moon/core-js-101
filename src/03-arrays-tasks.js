@@ -487,8 +487,29 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
-  throw new Error('Not implemented');
+function getIdentityMatrix(n) {
+  // const arr = [];
+  // const rows = n;
+  // const columns = n;
+  // for (let i = 0; i < rows; i += 1) {
+  //   arr[i] = [];
+  //   for (let j = 0; j < columns; j += 1) {
+  //     arr[i][j] = 0;
+  //   }
+  // }
+  // for (let x = 0; x < arr.length; x += 1) { // количесто массивов в массиве
+  //   for (let m = 0; m < arr[x].length; m += 1) { // количество элементов в каждом массиве
+  //     if (x === m) {
+  //       arr[x][m] = 1;
+  //     }
+  //   }
+  // }
+  // return arr;
+  const array = Array(n).fill(0); // [0,0,0,0,0]
+  const NewArr = array.map(() => Array(n).fill(0));
+  const result = NewArr.map((el, index) => el.fill(1, index, index + 1));
+  // array.fill(value, start, end)
+  return result;
 }
 
 /**
