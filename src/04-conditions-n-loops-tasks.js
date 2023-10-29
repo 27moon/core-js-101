@@ -377,8 +377,41 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const stack = [];
+  const opened = ['(', '[', '{', '<'];
+  const brackets = {
+    ')': '(',
+    ']': '[',
+    '}': '{',
+    '>': '<',
+  };
+  if (str === '') {
+    return true;
+  }
+  if (str === '<>') {
+    return true;
+  }
+  for (let i = 0; i < str.length; i += 1) {
+    const currentItem = str[i];
+    if (str.length % 2 !== 0) {
+      return false;
+    }
+    if (opened.includes(currentItem)) {
+      stack.push(currentItem);
+    } else {
+      if (stack.length === 0) {
+        return false;
+      }
+      const topEl = stack[stack.length - 1];
+      if (brackets[currentItem] === topEl) {
+        stack.pop();
+      } else {
+        return false;
+      }
+    }
+  }
+  return stack.length === 0;
 }
 
 
@@ -402,8 +435,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -419,8 +452,20 @@ function toNaryString(/* num, n */) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const arr = [];
+  const eachPathSplit = pathes.map((el) => el.split('/'));
+  // console.log(eachPathSplit);
+  const firstPathSplit = eachPathSplit[0];
+  // console.log(firstPathSplit);
+  for (let i = 0; i < firstPathSplit.length; i += 1) {
+    if (eachPathSplit.every((item) => item[i] === firstPathSplit[i])) {
+      arr.push(firstPathSplit[i]);
+    }
+  }
+  if (arr.length > 0) {
+    return `${arr.join('/')}/`;
+  } return '';
 }
 
 
